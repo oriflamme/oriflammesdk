@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// OpenGL Mathematics Copyright (c) 2005 - 2014 G-Truc Creation (www.g-truc.net)
+// OpenGL Mathematics Copyright (c) 2005 - 2013 G-Truc Creation (www.g-truc.net)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Created : 2012-09-19
 // Updated : 2012-12-13
@@ -7,12 +7,16 @@
 // File    : test/gtc/constants.cpp
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define GLM_FORCE_RADIANS
+#include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 
 int test_epsilon()
 {
 	int Error(0);
+
+	{
+		glm::half Test = glm::epsilon<glm::half>();
+	}
 
 	{
 		float Test = glm::epsilon<float>();
@@ -29,10 +33,9 @@ int main()
 {
 	int Error(0);
 
-	//float MinHalf = 0.0f;
-	//while (glm::half(MinHalf) == glm::half(0.0f))
-	//	MinHalf += std::numeric_limits<float>::epsilon();
-	Error += test_epsilon();
-	
+	float MinHalf = 0.0f;
+	while (glm::half(MinHalf) == glm::half(0.0f))
+		MinHalf += std::numeric_limits<float>::epsilon();
+
 	return Error;
 }
