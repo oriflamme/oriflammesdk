@@ -1,4 +1,4 @@
-# wxWidgets-3.0.0
+# wxWidgets-3.0.1
 
 ## OS-X
 
@@ -10,7 +10,7 @@
 > make install
 ~~~
 
-# GLEW-1.10.0
+# GLEW-1.11.0
 
 ## OS-X
 
