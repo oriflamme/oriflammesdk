@@ -69,6 +69,9 @@
 /* Define this if your version of GTK+ is >= 3.0 */
 /* #undef __WXGTK3__ */
 
+/* Define this if your version of GTK+ is >= 3.90.0 */
+/* #undef __WXGTK4__ */
+
 /* Define this if you want to use GPE features */
 /* #undef __WXGPE__ */
 
@@ -153,6 +156,8 @@
 #define wxDIALOG_UNIT_COMPATIBILITY   0
 
 #define wxUSE_UNSAFE_WXSTRING_CONV 1
+
+#define wxUSE_REPRODUCIBLE_BUILD 0
 
 
 
@@ -283,6 +288,8 @@
 
 #define wxUSE_ZLIB 1
 
+#define wxUSE_LIBLZMA       0
+
 #define wxUSE_APPLE_IEEE 1
 
 #define wxUSE_JOYSTICK 1
@@ -327,7 +334,7 @@
 
 #define wxUSE_STC 1
 
-#define wxUSE_WEBVIEW 0
+#define wxUSE_WEBVIEW 1
 
 #ifdef __WXMSW__
 #define wxUSE_WEBVIEW_IE 0
@@ -335,22 +342,24 @@
 #define wxUSE_WEBVIEW_IE 0
 #endif
 
-#if defined(__WXGTK__) || defined(__WXOSX__)
-#define wxUSE_WEBVIEW_WEBKIT 0
+#if (defined(__WXGTK__) && !defined(__WXGTK3__)) || defined(__WXOSX__)
+#define wxUSE_WEBVIEW_WEBKIT 1
 #else
-#define wxUSE_WEBVIEW_WEBKIT 0
+#define wxUSE_WEBVIEW_WEBKIT 1
+#endif
+
+#if defined(__WXGTK3__)
+#define wxUSE_WEBVIEW_WEBKIT2 0
+#else
+#define wxUSE_WEBVIEW_WEBKIT2 0
 #endif
 
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) || \
+    (defined(__MINGW32__) && (__GNUC__ > 4 || __GNUC_MINOR__ >= 8))
 #define wxUSE_GRAPHICS_CONTEXT 1
 #else
-
-
-
-
-
-#   define wxUSE_GRAPHICS_CONTEXT 1
+#define wxUSE_GRAPHICS_CONTEXT 1
 #endif
 
 #define wxUSE_CAIRO 0
@@ -465,6 +474,8 @@
 #define wxUSE_NOTIFICATION_MESSAGE 1
 
 #define wxUSE_PREFERENCES_EDITOR 1
+
+#define wxUSE_PRIVATE_FONTS 1
 
 #define wxUSE_RICHTOOLTIP 1
 
@@ -858,7 +869,7 @@
 /*
  * Define if compiler has __thread keyword.
  */
-#define HAVE___THREAD_KEYWORD 1
+/* #undef HAVE___THREAD_KEYWORD */
 /*
  * Define if large (64 bit file offsets) files are supported.
  */
@@ -883,11 +894,6 @@
  * wxWebKitCtrl
  */
 #define wxUSE_WEBKIT 1
-
-/*
- * Objective-C class name uniquifying
- */
-#define wxUSE_OBJC_UNIQUIFYING 0
 
 /*
  * The const keyword is being introduced more in wxWindows.
@@ -927,6 +933,9 @@
 
 /* struct tm doesn't always have the tm_gmtoff field, define this if it does */
 #define WX_GMTOFF_IN_TM 1
+
+/* check if nl_langinfo() can be called with argument _NL_TIME_FIRST_WEEKDAY */
+/* #undef HAVE_NL_TIME_FIRST_WEEKDAY */
 
 /* Define if you have poll(2) function */
 /* #undef HAVE_POLL */
@@ -1260,6 +1269,9 @@
 
 /* Define if setpriority() is available. */
 #define HAVE_SETPRIORITY 1
+
+/* Define if xlocale.h header file exists. */
+#define HAVE_XLOCALE_H 1
 
 /* Define if locale_t is available */
 #define HAVE_LOCALE_T 1

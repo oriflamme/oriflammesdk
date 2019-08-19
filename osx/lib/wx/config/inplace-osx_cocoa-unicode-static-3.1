@@ -25,11 +25,11 @@ check_dirname()
 
 # set the variables which allow the real wx-config to check if we're using it
 # in place or after installation
-this_prefix=`check_dirname "/Users/ishiai/oriflamme/wxWidgets-master/work/.."`
+this_prefix=`check_dirname "/Users/tatsuya-koyama/Downloads/src/wxWidgets-from-github/wxWidgets-3.1.2/build-work-5/.."`
 if [ "x$this_prefix" = "x" ]; then
     exit 1
 fi
-this_exec_prefix=`check_dirname "/Users/ishiai/oriflamme/wxWidgets-master/work"`
+this_exec_prefix=`check_dirname "/Users/tatsuya-koyama/Downloads/src/wxWidgets-from-github/wxWidgets-3.1.2/build-work-5"`
 if [ "x$this_exec_prefix" = "x" ]; then
     exit 1
 fi
